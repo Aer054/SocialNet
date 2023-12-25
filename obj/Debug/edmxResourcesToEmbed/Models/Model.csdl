@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrifonovIR_8I11_IDZModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Access_for_Comunity">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CommunityMembers" Relationship="Self.Relationship18" FromRole="Access_for_Comunity" ToRole="CommunityMembers" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentsID" />
+    </Key>
+    <Property Name="CommentsID" Type="Guid" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="CommunityPostID" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="CommunityPost" Relationship="Self.Relationship31" FromRole="Comments" ToRole="CommunityPost" />
+  </EntityType>
+  <EntityType Name="Community">
+    <Key>
+      <PropertyRef Name="CommunityID" />
+    </Key>
+    <Property Name="CommunityID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsItBlog" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CommunityMembers" Relationship="Self.Relationship16" FromRole="Community" ToRole="CommunityMembers" />
+  </EntityType>
+  <EntityType Name="CommunityMember">
+    <Key>
+      <PropertyRef Name="CommunityMembersID" />
+    </Key>
+    <Property Name="CommunityMembersID" Type="Guid" Nullable="false" />
+    <Property Name="CommunityID" Type="Guid" Nullable="false" />
+    <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Access_for_Comunity" Relationship="Self.Relationship18" FromRole="CommunityMembers" ToRole="Access_for_Comunity" />
+    <NavigationProperty Name="Community" Relationship="Self.Relationship16" FromRole="CommunityMembers" ToRole="Community" />
+    <NavigationProperty Name="User" Relationship="Self.Relationship17" FromRole="CommunityMembers" ToRole="User" />
+    <NavigationProperty Name="CommunityPosts" Relationship="Self.Relationship23" FromRole="CommunityMembers" ToRole="CommunityPost" />
+  </EntityType>
+  <EntityType Name="CommunityPost">
+    <Key>
+      <PropertyRef Name="CommunityPostID" />
+    </Key>
+    <Property Name="CommunityPostID" Type="Guid" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="CommunityMembersID" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Comments" Relationship="Self.Relationship31" FromRole="CommunityPost" ToRole="Comments" />
+    <NavigationProperty Name="CommunityMember" Relationship="Self.Relationship23" FromRole="CommunityPost" ToRole="CommunityMembers" />
+  </EntityType>
+  <EntityType Name="Friend_Request">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Name="RequestID" Type="Guid" Nullable="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="FromUserLogin" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ToUserLogin" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.Relationship13" FromRole="Friend_Request" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="Self.Relationship8" FromRole="Friend_Request" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Login" />
+    </Key>
+    <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Last_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="First_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CommunityMembers" Relationship="Self.Relationship17" FromRole="User" ToRole="CommunityMembers" />
+    <NavigationProperty Name="Friend_Request" Relationship="Self.Relationship13" FromRole="User" ToRole="Friend_Request" />
+    <NavigationProperty Name="Friend_Request1" Relationship="Self.Relationship8" FromRole="User" ToRole="Friend_Request" />
+    <NavigationProperty Name="UserPosts" Relationship="TrifonovIR_8I11_IDZModel.FK_UserPost_User" FromRole="User" ToRole="UserPost" />
+  </EntityType>
+  <EntityType Name="CommunityMembersRole">
+    <Key>
+      <PropertyRef Name="Login" />
+      <PropertyRef Name="Community" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Community" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProtectedUser">
+    <Key>
+      <PropertyRef Name="Login" />
+      <PropertyRef Name="Last_Name" />
+      <PropertyRef Name="First_Name" />
+    </Key>
+    <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Last_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="First_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="Relationship18">
+    <End Role="Access_for_Comunity" Type="Self.Access_for_Comunity" Multiplicity="1" />
+    <End Role="CommunityMembers" Type="Self.CommunityMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Access_for_Comunity">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="CommunityMembers">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship31">
+    <End Role="CommunityPost" Type="Self.CommunityPost" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CommunityPost">
+        <PropertyRef Name="CommunityPostID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="CommunityPostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship16">
+    <End Role="Community" Type="Self.Community" Multiplicity="1" />
+    <End Role="CommunityMembers" Type="Self.CommunityMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Community">
+        <PropertyRef Name="CommunityID" />
+      </Principal>
+      <Dependent Role="CommunityMembers">
+        <PropertyRef Name="CommunityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship17">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="CommunityMembers" Type="Self.CommunityMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Login" />
+      </Principal>
+      <Dependent Role="CommunityMembers">
+        <PropertyRef Name="Login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship23">
+    <End Role="CommunityMembers" Type="Self.CommunityMember" Multiplicity="1" />
+    <End Role="CommunityPost" Type="Self.CommunityPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CommunityMembers">
+        <PropertyRef Name="CommunityMembersID" />
+      </Principal>
+      <Dependent Role="CommunityPost">
+        <PropertyRef Name="CommunityMembersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship13">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Friend_Request" Type="Self.Friend_Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Login" />
+      </Principal>
+      <Dependent Role="Friend_Request">
+        <PropertyRef Name="ToUserLogin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship8">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Friend_Request" Type="Self.Friend_Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Login" />
+      </Principal>
+      <Dependent Role="Friend_Request">
+        <PropertyRef Name="FromUserLogin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Access_for_Comunities" EntityType="Self.Access_for_Comunity" />
+    <EntitySet Name="Comments" EntityType="Self.Comment" />
+    <EntitySet Name="Communities" EntityType="Self.Community" />
+    <EntitySet Name="CommunityMembers" EntityType="Self.CommunityMember" />
+    <EntitySet Name="CommunityPosts" EntityType="Self.CommunityPost" />
+    <EntitySet Name="Friend_Requests" EntityType="Self.Friend_Request" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="CommunityMembersRoles" EntityType="Self.CommunityMembersRole" />
+    <EntitySet Name="ProtectedUsers" EntityType="Self.ProtectedUser" />
+    <AssociationSet Name="Relationship18" Association="Self.Relationship18">
+      <End Role="Access_for_Comunity" EntitySet="Access_for_Comunities" />
+      <End Role="CommunityMembers" EntitySet="CommunityMembers" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship31" Association="Self.Relationship31">
+      <End Role="CommunityPost" EntitySet="CommunityPosts" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship16" Association="Self.Relationship16">
+      <End Role="Community" EntitySet="Communities" />
+      <End Role="CommunityMembers" EntitySet="CommunityMembers" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship17" Association="Self.Relationship17">
+      <End Role="User" EntitySet="Users" />
+      <End Role="CommunityMembers" EntitySet="CommunityMembers" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship23" Association="Self.Relationship23">
+      <End Role="CommunityMembers" EntitySet="CommunityMembers" />
+      <End Role="CommunityPost" EntitySet="CommunityPosts" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship13" Association="Self.Relationship13">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Friend_Request" EntitySet="Friend_Requests" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship8" Association="Self.Relationship8">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Friend_Request" EntitySet="Friend_Requests" />
+    </AssociationSet>
+    <FunctionImport Name="AddUser">
+      <Parameter Name="Login" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="Last_Name" Mode="In" Type="String" />
+      <Parameter Name="First_Name" Mode="In" Type="String" />
+      <Parameter Name="Patronymic" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetCurrentCommunityComposition" ReturnType="Collection(TrifonovIR_8I11_IDZModel.GetCurrentCommunityComposition_Result)">
+      <Parameter Name="CommunityName" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="UserPosts" EntityType="TrifonovIR_8I11_IDZModel.UserPost" />
+    <AssociationSet Name="FK_UserPost_User" Association="TrifonovIR_8I11_IDZModel.FK_UserPost_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserPost" EntitySet="UserPosts" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="GetCurrentCommunityComposition_Result">
+    <Property Type="String" Name="Last_Name" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="First_Name" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Patronymic" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <EntityType Name="UserPost">
+    <Key>
+      <PropertyRef Name="UserPostID" />
+    </Key>
+    <Property Name="UserPostID" Type="Guid" Nullable="false" />
+    <Property Name="Login" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Content" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="TrifonovIR_8I11_IDZModel.FK_UserPost_User" FromRole="UserPost" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_UserPost_User">
+    <End Type="TrifonovIR_8I11_IDZModel.User" Role="User" Multiplicity="1" />
+    <End Type="TrifonovIR_8I11_IDZModel.UserPost" Role="UserPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Login" />
+      </Principal>
+      <Dependent Role="UserPost">
+        <PropertyRef Name="Login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,24 @@
+﻿@model List<SocialNet.Models.User>
+@{
+    ViewBag.Title = "Список заявок";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    if (User.Identity.IsAuthenticated)
+    {
+        <table class="row">
+            <div class="row">
+                <div class="col-md-4"><strong>Список заявок в друзья</strong></div>
+            </div>
+
+            <tbody>
+                @foreach (var friendReq in Model)
+                {
+                    { Html.RenderPartial("FriendsRequstOverviewPartical", friendReq); }
+                }
+            </tbody>
+        </table>
+    }
+}

@@ -1,0 +1,22 @@
+﻿@model List<SocialNet.Models.UserPost>
+
+@{
+    ViewBag.Title = "UserPost";
+}
+<style>
+    .post {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+</style>
+
+@foreach (var post in Model)
+{
+    <div class="post">
+        <h3>@post.Title</h3>
+        <p>@post.Content</p>
+    </div>
+}
+

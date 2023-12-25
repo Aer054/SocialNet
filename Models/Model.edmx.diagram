@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b56e2c5b80c0476ab3eccaf5af152452" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="TrifonovIR_8I11_IDZModel.Access_for_Comunity" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrifonovIR_8I11_IDZModel.Comment" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrifonovIR_8I11_IDZModel.Community" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrifonovIR_8I11_IDZModel.CommunityMember" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrifonovIR_8I11_IDZModel.CommunityPost" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrifonovIR_8I11_IDZModel.Friend_Request" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrifonovIR_8I11_IDZModel.User" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrifonovIR_8I11_IDZModel.CommunityMembersRole" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrifonovIR_8I11_IDZModel.ProtectedUser" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="TrifonovIR_8I11_IDZModel.Relationship18" ManuallyRouted="false" />
+        <AssociationConnector Association="TrifonovIR_8I11_IDZModel.Relationship31" ManuallyRouted="false" />
+        <AssociationConnector Association="TrifonovIR_8I11_IDZModel.Relationship16" ManuallyRouted="false" />
+        <AssociationConnector Association="TrifonovIR_8I11_IDZModel.Relationship17" ManuallyRouted="false" />
+        <AssociationConnector Association="TrifonovIR_8I11_IDZModel.Relationship23" ManuallyRouted="false" />
+        <AssociationConnector Association="TrifonovIR_8I11_IDZModel.Relationship13" ManuallyRouted="false" />
+        <AssociationConnector Association="TrifonovIR_8I11_IDZModel.Relationship8" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TrifonovIR_8I11_IDZModel.UserPost" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="TrifonovIR_8I11_IDZModel.FK_UserPost_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

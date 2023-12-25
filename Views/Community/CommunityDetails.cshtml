@@ -1,0 +1,32 @@
+﻿@model SocialNet.Models.Community
+
+@{
+    ViewBag.Title = "CommunityDetails";
+}
+
+<h2>@Model.Name</h2>
+<div>
+    @{ Html.RenderAction("CommunityPosts", new { ID_Community = Model.CommunityID }); }
+</div>
+@using (Html.BeginForm("AddPost", "Community", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="Title">Заголовок:</label>
+        <input type="text" class="form-control" id="Title" name="Title" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Content">Содержимое:</label>
+        <textarea class="form-control" id="Content" name="Content" required></textarea>
+    </div>
+
+    <input type="hidden" name="CommunityID" value="@Model.CommunityID" />
+
+    <button type="submit" class="btn btn-primary">Отправить</button>
+}
+<div>
+    @Html.ActionLink("Назад", "ListOfCommunity")
+</div>
+

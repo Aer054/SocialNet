@@ -1,0 +1,28 @@
+﻿@model SocialNet.Models.Community
+    <style>
+        .community-link {
+            font-size: 20px;
+            color: #007BFF; 
+            text-decoration: none; 
+        }
+
+            .community-link:hover {
+                color: #0056b3; 
+                text-decoration: underline; 
+            }
+
+    </style>
+    <div class="row">
+        <div class="col-md-4">
+            <a href="@Url.Action("CommunityDetails", "Community", new { ID_Community = Model.CommunityID })" class="community-link">@Model.Name</a>
+        </div>
+        <div class="col-md-2 ml-auto">
+            @using (Html.BeginForm("LeaveComunity", "Community", new { ID_Community = Model.CommunityID }, FormMethod.Post, new { @class = "form-inline" }))
+            {
+                @Html.AntiForgeryToken()
+                <input type="submit" value="Выйти из сообщества" class="btn btn-default" />
+            }
+        </div>
+    </div>
+
+

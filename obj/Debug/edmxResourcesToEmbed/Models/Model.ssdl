@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище TrifonovIR_8I11_IDZModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Access for Comunity">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="CommentsID" />
+    </Key>
+    <Property Name="CommentsID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Content" Type="varchar" MaxLength="150" />
+    <Property Name="CommunityPostID" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Community">
+    <Key>
+      <PropertyRef Name="CommunityID" />
+    </Key>
+    <Property Name="CommunityID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="IsItBlog" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CommunityMembers">
+    <Key>
+      <PropertyRef Name="CommunityMembersID" />
+    </Key>
+    <Property Name="CommunityMembersID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CommunityID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CommunityPost">
+    <Key>
+      <PropertyRef Name="CommunityPostID" />
+    </Key>
+    <Property Name="CommunityPostID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Content" Type="varchar" MaxLength="150" />
+    <Property Name="CommunityMembersID" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Friend Request">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Name="RequestID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="FromUserLogin" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="ToUserLogin" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Login" />
+    </Key>
+    <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="PasswordHash" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salt" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Last_Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="First_Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Patronymic" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="UserPost">
+    <Key>
+      <PropertyRef Name="UserPostID" />
+    </Key>
+    <Property Name="UserPostID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Content" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TrifonovIR_8I11_IDZ.dbo.CommunityMembersRole" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="CommunityMembersRole">
+    <Key>
+      <PropertyRef Name="Login" />
+      <PropertyRef Name="Community" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Community" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TrifonovIR_8I11_IDZ.dbo.ProtectedUser" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="ProtectedUser">
+    <Key>
+      <PropertyRef Name="Login" />
+      <PropertyRef Name="Last_Name" />
+      <PropertyRef Name="First_Name" />
+    </Key>
+    <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Last_Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="First_Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Patronymic" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK_UserPost_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserPost" Type="Self.UserPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Login" />
+      </Principal>
+      <Dependent Role="UserPost">
+        <PropertyRef Name="Login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship13">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Friend Request" Type="Self.Friend Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Login" />
+      </Principal>
+      <Dependent Role="Friend Request">
+        <PropertyRef Name="ToUserLogin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship16">
+    <End Role="Community" Type="Self.Community" Multiplicity="1" />
+    <End Role="CommunityMembers" Type="Self.CommunityMembers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Community">
+        <PropertyRef Name="CommunityID" />
+      </Principal>
+      <Dependent Role="CommunityMembers">
+        <PropertyRef Name="CommunityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship17">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="CommunityMembers" Type="Self.CommunityMembers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Login" />
+      </Principal>
+      <Dependent Role="CommunityMembers">
+        <PropertyRef Name="Login" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship18">
+    <End Role="Access for Comunity" Type="Self.Access for Comunity" Multiplicity="1" />
+    <End Role="CommunityMembers" Type="Self.CommunityMembers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Access for Comunity">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="CommunityMembers">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship23">
+    <End Role="CommunityMembers" Type="Self.CommunityMembers" Multiplicity="1" />
+    <End Role="CommunityPost" Type="Self.CommunityPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CommunityMembers">
+        <PropertyRef Name="CommunityMembersID" />
+      </Principal>
+      <Dependent Role="CommunityPost">
+        <PropertyRef Name="CommunityMembersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship31">
+    <End Role="CommunityPost" Type="Self.CommunityPost" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CommunityPost">
+        <PropertyRef Name="CommunityPostID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="CommunityPostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Relationship8">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Friend Request" Type="Self.Friend Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Login" />
+      </Principal>
+      <Dependent Role="Friend Request">
+        <PropertyRef Name="FromUserLogin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Login" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="Last_Name" Type="varchar" Mode="In" />
+    <Parameter Name="First_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Patronymic" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetCurrentCommunityComposition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CommunityName" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="Хранилище TrifonovIR_8I11_IDZModelContainer">
+    <EntitySet Name="Access for Comunity" EntityType="Self.Access for Comunity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Community" EntityType="Self.Community" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CommunityMembers" EntityType="Self.CommunityMembers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CommunityPost" EntityType="Self.CommunityPost" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Friend Request" EntityType="Self.Friend Request" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserPost" EntityType="Self.UserPost" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CommunityMembersRole" EntityType="Self.CommunityMembersRole" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CommunityMembersRole].[Login] AS [Login], 
+    [CommunityMembersRole].[Community] AS [Community], 
+    [CommunityMembersRole].[Name] AS [Name]
+    FROM [dbo].[CommunityMembersRole] AS [CommunityMembersRole]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProtectedUser" EntityType="Self.ProtectedUser" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProtectedUser].[Login] AS [Login], 
+    [ProtectedUser].[Last_Name] AS [Last_Name], 
+    [ProtectedUser].[First_Name] AS [First_Name], 
+    [ProtectedUser].[Patronymic] AS [Patronymic]
+    FROM [dbo].[ProtectedUser] AS [ProtectedUser]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_UserPost_User" Association="Self.FK_UserPost_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserPost" EntitySet="UserPost" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship13" Association="Self.Relationship13">
+      <End Role="User" EntitySet="User" />
+      <End Role="Friend Request" EntitySet="Friend Request" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship16" Association="Self.Relationship16">
+      <End Role="Community" EntitySet="Community" />
+      <End Role="CommunityMembers" EntitySet="CommunityMembers" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship17" Association="Self.Relationship17">
+      <End Role="User" EntitySet="User" />
+      <End Role="CommunityMembers" EntitySet="CommunityMembers" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship18" Association="Self.Relationship18">
+      <End Role="Access for Comunity" EntitySet="Access for Comunity" />
+      <End Role="CommunityMembers" EntitySet="CommunityMembers" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship23" Association="Self.Relationship23">
+      <End Role="CommunityMembers" EntitySet="CommunityMembers" />
+      <End Role="CommunityPost" EntitySet="CommunityPost" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship31" Association="Self.Relationship31">
+      <End Role="CommunityPost" EntitySet="CommunityPost" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="Relationship8" Association="Self.Relationship8">
+      <End Role="User" EntitySet="User" />
+      <End Role="Friend Request" EntitySet="Friend Request" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

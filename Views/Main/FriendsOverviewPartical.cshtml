@@ -1,0 +1,29 @@
+﻿@model SocialNet.Models.User
+<div class="row">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            <div class="col-md-4">
+                <a href="@Url.Action("Profile", "Main", new { userLogin = Model.Login })" class="community-link"> @Model.Last_Name @Model.First_Name @Model.Patronymic</a>
+            </div>
+
+            <div class="col-md-2 ml-auto">
+                @using (Html.BeginForm())
+                {
+
+                }
+            </div>
+
+            <div class="col-md-2 ml-auto">
+                @using (Html.BeginForm("DeleteConfirmed", "Main", new { FriendLogin = Model.Login }, FormMethod.Post, new { @class = "form-inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" value="Удалить" class="btn btn-default" />
+                }
+            </div>
+            
+        </div>
+    }
+    </div>
+
+

@@ -1,0 +1,48 @@
+﻿@model List<SocialNet.Models.User>
+@{
+    ViewBag.Title = "Список друзей";
+}
+<style>
+    .form-top-margin {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+</style>
+
+@using (Html.BeginForm("AddFriend", "Main", FormMethod.Post, new { @class = "form-inline form-top-margin" }))
+{
+    @Html.AntiForgeryToken()
+    if (User.Identity.IsAuthenticated)
+    {
+        <div class="form-group">
+            <input type="text" class="form-control" id="friendLogin" name="friendLogin" placeholder="Введите логин друга" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Добавить в друзья</button>
+        </div>
+       <div class="form-group">
+            @Html.ActionLink("Заявки в друзья", "ListOfFriendsRequest", "Main", null, new { @class = "btn btn-default" })
+        </div>
+    }
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    if (User.Identity.IsAuthenticated)
+    {
+        <table class="row">
+            <div class="row">
+                <div class="col-md-4" style="font-size: 30px"><strong>Список друзей</strong></div>
+            </div>
+
+            <tbody>
+                @foreach (var friend in Model)
+                {
+                    { Html.RenderPartial("FriendsOverviewPartical", friend); }
+                }
+            </tbody>
+        </table>
+    }
+}
+

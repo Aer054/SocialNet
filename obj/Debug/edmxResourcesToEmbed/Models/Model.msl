@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище TrifonovIR_8I11_IDZModelContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Access_for_Comunities">
+      <EntityTypeMapping TypeName="TrifonovIR_8I11_IDZModel.Access_for_Comunity">
+        <MappingFragment StoreEntitySet="Access for Comunity">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="TrifonovIR_8I11_IDZModel.Comment">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="CommentsID" ColumnName="CommentsID" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="CommunityPostID" ColumnName="CommunityPostID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Communities">
+      <EntityTypeMapping TypeName="TrifonovIR_8I11_IDZModel.Community">
+        <MappingFragment StoreEntitySet="Community">
+          <ScalarProperty Name="CommunityID" ColumnName="CommunityID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsItBlog" ColumnName="IsItBlog" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommunityMembers">
+      <EntityTypeMapping TypeName="TrifonovIR_8I11_IDZModel.CommunityMember">
+        <MappingFragment StoreEntitySet="CommunityMembers">
+          <ScalarProperty Name="CommunityMembersID" ColumnName="CommunityMembersID" />
+          <ScalarProperty Name="CommunityID" ColumnName="CommunityID" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommunityPosts">
+      <EntityTypeMapping TypeName="TrifonovIR_8I11_IDZModel.CommunityPost">
+        <MappingFragment StoreEntitySet="CommunityPost">
+          <ScalarProperty Name="CommunityPostID" ColumnName="CommunityPostID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="CommunityMembersID" ColumnName="CommunityMembersID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Friend_Requests">
+      <EntityTypeMapping TypeName="TrifonovIR_8I11_IDZModel.Friend_Request">
+        <MappingFragment StoreEntitySet="Friend Request">
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="FromUserLogin" ColumnName="FromUserLogin" />
+          <ScalarProperty Name="ToUserLogin" ColumnName="ToUserLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="TrifonovIR_8I11_IDZModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="Salt" ColumnName="Salt" />
+          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+          <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommunityMembersRoles">
+      <EntityTypeMapping TypeName="TrifonovIR_8I11_IDZModel.CommunityMembersRole">
+        <MappingFragment StoreEntitySet="CommunityMembersRole">
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Community" ColumnName="Community" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProtectedUsers">
+      <EntityTypeMapping TypeName="TrifonovIR_8I11_IDZModel.ProtectedUser">
+        <MappingFragment StoreEntitySet="ProtectedUser">
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+          <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddUser" FunctionName="Хранилище TrifonovIR_8I11_IDZModel.AddUser" />
+    <FunctionImportMapping FunctionImportName="GetCurrentCommunityComposition" FunctionName="Хранилище TrifonovIR_8I11_IDZModel.GetCurrentCommunityComposition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TrifonovIR_8I11_IDZModel.GetCurrentCommunityComposition_Result">
+          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+          <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="UserPosts">
+      <EntityTypeMapping TypeName="TrifonovIR_8I11_IDZModel.UserPost">
+        <MappingFragment StoreEntitySet="UserPost">
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="UserPostID" ColumnName="UserPostID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,48 @@
+﻿@model List<SocialNet.Models.Community>
+@{
+    ViewBag.Title = "ListOfCommunity";
+}
+<style>
+    .form-top-margin {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+</style>
+
+@using (Html.BeginForm("JoinCommunity", "Community", new { @class = "form-inline" }))
+{
+    @Html.AntiForgeryToken()
+    if (User.Identity.IsAuthenticated)
+    {
+        <div class="form-group form-top-margin" style="display: inline-block;">
+            <input type="text" class="form-control" id="communityName" name="communityName" placeholder="Введите название группы" required>
+        </div>
+        <div class="form-group form-top-margin" style="display: inline-block;">
+            <button type="submit" class="btn btn-default">Вступить в сообщество</button>
+        </div>
+        <div class="form-group">
+                    @Html.ActionLink("Создать сообщество", "CreateCommunity", "Community", null, new { @class = "btn btn-default" })
+        </div>
+    }
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    if (User.Identity.IsAuthenticated)
+    {
+        <table class="row">
+            <div class="row">
+                
+                <div class="col-md-4"><strong>Список сообществ</strong></div>
+            </div>
+
+            <tbody>
+                @foreach (var community in Model)
+                {
+                    { Html.RenderPartial("CommunityOverviewPartical", community); }
+                }
+            </tbody>
+        </table>
+    }
+}
