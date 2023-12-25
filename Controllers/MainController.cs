@@ -51,7 +51,6 @@ namespace SocialNet.Controllers
             return View(FriendsReq);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken()]
         [Authorize]
